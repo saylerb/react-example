@@ -10,7 +10,6 @@
 
 var React = require('react');
 var sortBy = require('sort-by');
-var { div, h1, ul, li} = React.DOM
 
 var DATA = {
   title: 'Menu',
@@ -28,13 +27,13 @@ var Menu = React.createClass({
     var mexican_food = DATA.items
       .filter((item) => item.type == 'mexican')
       .sort(sortBy('name'))
-      .map((item) => li({}, item.name));
+      .map((item) => <li>{item.name}</li>);
 
     return (
-      div({},
-        h1({}, DATA.title),
-        ul({}, mexican_food)
-      )
+      <div>
+        <h1>{DATA.title}</h1>
+        <ul>{mexican_food}</ul>
+      </div>
     )
   }
 });
