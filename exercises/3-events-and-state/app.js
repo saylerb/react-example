@@ -19,14 +19,13 @@ var App = React.createClass({
     }
   },
 
-  handleTabClick (tabIndexNumber) {
-    this.setState({ activeTabIndex: tabIndexNumber });
-  },
-
   renderTabs () {
     return this.props.countries.map((country, index) => {
       return (
-        <div onClick={this.handleTabClick.bind(this, index)} style={index === this.state.activeTabIndex ? styles.activeTab : styles.tab}>
+        <div
+          key={country.name}
+          onClick={() => this.setState({ activeTabIndex: index })}
+          style={index === this.state.activeTabIndex ? styles.activeTab : styles.tab}>
           {country.name}
         </div>
       );
@@ -34,9 +33,11 @@ var App = React.createClass({
   },
 
   renderPanel () {
+    var activeTabIndex = this.state.activeTabIndex;
+    var activeCountry = this.props.countries[activeTabIndex];
     return (
       <div>
-        <p>{this.props.countries[this.state.activeTabIndex].description}</p>
+        <p>{activeCountry.description}</p>
       </div>
     );
   },
